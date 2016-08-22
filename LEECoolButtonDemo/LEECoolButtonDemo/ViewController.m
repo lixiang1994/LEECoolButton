@@ -71,9 +71,13 @@
     
     if (sender.selected) {
         
+        //未选中状态
+        
         [sender deselect];
         
     } else {
+        
+        //选中状态
         
         [sender select];
     }
