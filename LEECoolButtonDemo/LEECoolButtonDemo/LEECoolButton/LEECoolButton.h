@@ -26,11 +26,23 @@
 /** 线条颜色 */
 @property (nonatomic , strong ) UIColor *lineColor;
 
+//========================
+
 /** 选中图片颜色 */
 @property (nonatomic , strong ) UIColor *imageColorOn;
 
 /** 未选中图片颜色 */
 @property (nonatomic , strong ) UIColor *imageColorOff;
+
+//== 图片 与 图片颜色二选一 ==
+
+/** 选中图片 */
+@property (nonatomic , strong ) UIImage *imageOn;
+
+/** 未选中图片 */
+@property (nonatomic , strong ) UIImage *imageOff;
+
+//========================
 
 /** 动画时长 */
 @property (nonatomic , assign ) double duration;
@@ -41,7 +53,7 @@
  *  @param image      图片
  *  @param imageFrame 图片frame
  *
- *  @return <#return value description#>
+ *  @return 按钮对象
  */
 + (id)coolButtonWithImage:(UIImage *)image ImageFrame:(CGRect)imageFrame;
 

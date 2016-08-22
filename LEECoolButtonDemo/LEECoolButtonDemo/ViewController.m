@@ -27,6 +27,10 @@
     
     starButton.frame = CGRectMake(margin, 100, 40, 40);
     
+    starButton.imageOn = [UIImage imageNamed:@"heart"];
+    
+    starButton.imageOff = [UIImage imageNamed:@"star"];
+    
     [starButton addTarget:self action:@selector(starButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:starButton];

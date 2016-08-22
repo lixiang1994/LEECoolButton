@@ -19,6 +19,8 @@
 
 @property (nonatomic , strong ) CAShapeLayer *imageShape;
 
+@property (nonatomic , strong ) CALayer *imageLayer;
+
 @property (nonatomic , strong ) NSMutableArray *lineArray;
 
 @end
@@ -152,6 +154,7 @@
         line.opacity = 0.0f;
         line.transform = CATransform3DMakeRotation(M_PI / 5 * (i * 2 + 1), 0.0, 0.0, 1.0);
         [self.layer addSublayer:line];
+        
         [self.lineArray addObject:line];
     
     }
@@ -172,15 +175,18 @@
     
     [self.layer addSublayer:_imageShape];
     
-    CALayer *imageMask = [CALayer layer];
-    
-    imageMask.contents = (__bridge id _Nullable)(image.CGImage);
-    
-    imageMask.bounds = imageFrame;
-    
-    imageMask.position = imgCenterPoint;
-    
-    _imageShape.mask = imageMask;
+    if (image) {
+        
+        CALayer *imageMask = [CALayer layer];
+        
+        imageMask.contents = (__bridge id _Nullable)(image.CGImage);
+        
+        imageMask.bounds = imageFrame;
+        
+        imageMask.position = imgCenterPoint;
+        
+        _imageShape.mask = imageMask;
+    }
 
 }
 
@@ -320,6 +326,7 @@
                           @(1.0),    // 12/30
                           @(0.0)     // 17/30
                           ];
+    
     lineOpacity.keyTimes = @[
                             @(0.0),    //  0/30
                             @(0.4),    // 12/30
@@ -350,6 +357,7 @@
                              [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.99,  0.99,  1.0)],  // 29/30
                              [NSValue valueWithCATransform3D:CATransform3DIdentity]                       // 30/30
                              ];
+    
     imageTransform.keyTimes = @[
                                @(0.0),    //  0/30
                                @(0.1),    //  3/30
@@ -385,7 +393,6 @@
     [self addTarget:self action:@selector(touchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
     
     [self addTarget:self action:@selector(touchCancel:) forControlEvents:UIControlEventTouchCancel];
-    
 }
 
 - (void)touchDown:(id)sender{
@@ -417,40 +424,28 @@
 
 - (UIColor *)circleColor{
     
-    if (!_circleColor) {
-        
-        _circleColor = [UIColor colorWithRed:255/255.0f green:172/255.0f blue:51/255.0f alpha:1.0f];
-    }
+    if (!_circleColor) _circleColor = [UIColor colorWithRed:255/255.0f green:172/255.0f blue:51/255.0f alpha:1.0f];
     
     return _circleColor;
 }
 
 - (UIColor *)lineColor{
     
-    if (!_lineColor) {
-        
-        _lineColor = [UIColor colorWithRed:250/255.0f green:120/255.0f blue:68/255.0f alpha:1.0f];
-    }
+    if (!_lineColor) _lineColor = [UIColor colorWithRed:250/255.0f green:120/255.0f blue:68/255.0f alpha:1.0f];
  
     return _lineColor;
 }
 
 - (UIColor *)imageColorOn{
     
-    if (!_imageColorOn) {
-        
-        _imageColorOn = [UIColor colorWithRed:255/255.0f green:172/255.0f blue:52/255.0f alpha:1.0f];
-    }
+    if (!_imageColorOn) _imageColorOn = [UIColor colorWithRed:255/255.0f green:172/255.0f blue:52/255.0f alpha:1.0f];
     
     return _imageColorOn;
 }
 
 - (UIColor *)imageColorOff{
     
-    if (!_imageColorOff) {
-        
-        _imageColorOff = [UIColor colorWithRed:136/255.0f green:153/255.0f blue:166/255.0f alpha:1.0f];
-    }
+    if (!_imageColorOff) _imageColorOff = [UIColor colorWithRed:136/255.0f green:153/255.0f blue:166/255.0f alpha:1.0f];
     
     return _imageColorOff;
 }
@@ -469,6 +464,8 @@
         
             self.imageShape.fillColor = self.imageColorOn.CGColor;
         
+            if (_imageLayer) self.imageLayer.contents = (__bridge id _Nullable)(self.imageOn.CGImage);
+            
         } else {
             
             [self deselect];
@@ -500,22 +497,32 @@
     
     _imageColorOn = imageColorOn;
     
-    if (self.selected) {
-        
-        self.imageShape.fillColor = imageColorOn.CGColor;
-    }
-    
+    if (self.selected) self.imageShape.fillColor = imageColorOn.CGColor;
 }
 
 - (void)setImageColorOff:(UIColor *)imageColorOff{
     
     _imageColorOff = imageColorOff;
     
-    if (!self.selected) {
-        
-         self.imageShape.fillColor = imageColorOff.CGColor;
-    }
+    if (!self.selected) self.imageShape.fillColor = imageColorOff.CGColor;
+}
+
+- (void)setImageOn:(UIImage *)imageOn{
     
+    _imageOn = imageOn;
+    
+    [self.imageShape removeFromSuperlayer];
+    
+    if (self.selected) self.imageLayer.contents = (__bridge id _Nullable)(imageOn.CGImage);
+}
+
+- (void)setImageOff:(UIImage *)imageOff{
+    
+    _imageOff = imageOff;
+    
+    [self.imageShape removeFromSuperlayer];
+    
+    if (!self.selected) self.imageLayer.contents = (__bridge id _Nullable)(imageOff.CGImage);
 }
 
 - (void)setDuration:(double)duration{
@@ -543,6 +550,8 @@
     
     self.imageShape.fillColor = self.imageColorOn.CGColor;
     
+    if (_imageLayer) self.imageLayer.contents = (__bridge id _Nullable)(self.imageOn.CGImage);
+    
     //添加动画
     
     [CATransaction begin];
@@ -552,6 +561,8 @@
     [self.circleMask addAnimation:circleMaskTransform forKey:@"transform"];
     
     [self.imageShape addAnimation:imageTransform forKey:@"transform"];
+    
+    if (_imageLayer) [self.imageLayer addAnimation:imageTransform forKey:@"transform"];
     
     for (CAShapeLayer *line in self.lineArray) {
         
@@ -563,7 +574,6 @@
     }
     
     [CATransaction commit];
-    
 }
 
 #pragma mark - 未选中
@@ -574,6 +584,8 @@
     
     self.imageShape.fillColor = self.imageColorOff.CGColor;
     
+    if (_imageLayer) self.imageLayer.contents = (__bridge id _Nullable)(self.imageOff.CGImage);
+    
     //移除所有动画
     
     [self.circleShape removeAllAnimations];
@@ -581,6 +593,8 @@
     [self.circleMask removeAllAnimations];
     
     [self.imageShape removeAllAnimations];
+    
+    if (_imageLayer) [self.imageLayer removeAllAnimations];
     
     for (CAShapeLayer *line in self.lineArray) {
         
@@ -592,6 +606,24 @@
 - (void)dealloc{
     
     _lineArray = nil;
+}
+
+#pragma mark - LazyLoading
+
+- (CALayer *)imageLayer{
+    
+    if (!_imageLayer) {
+        
+        _imageLayer = [CALayer layer];
+        
+        _imageLayer.bounds = imageFrame;
+        
+        _imageLayer.position = CGPointMake(imageFrame.origin.x + imageFrame.size.width / 2, imageFrame.origin.y + imageFrame.size.height / 2);
+        
+        [self.layer addSublayer:_imageLayer];
+    }
+    
+    return _imageLayer;
 }
 
 @end
