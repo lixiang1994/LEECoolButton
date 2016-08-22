@@ -7,11 +7,14 @@
 
 一个炫酷的按钮(适用于喜欢 , 点赞 , 收藏等)
 
-###OC重构版
-
-####效果
-
+演示
+==============
 ![](https://github.com/lixiang1994/LEECoolButton/blob/master/LEECoolButton运行效果图.gif)
+
+使用
+==============
+
+###OC重构版
 
 ####使用方法
 
@@ -23,10 +26,13 @@
 * 初始化按钮对象 添加图片对象 设置图片frame
 
 
-  `LEECoolButton *starButton = [LEECoolButton coolButtonWithImage:[UIImage imageNamed:@"star"] ImageFrame:CGRectMake(10, 10, 20, 20)];`
+        LEECoolButton *starButton = [LEECoolButton coolButtonWithImage:[UIImage imageNamed:@"star"] ImageFrame:CGRectMake(10, 10, 20, 20)];
   
 * 设置按钮frame
-  `starButton.frame = CGRectMake(margin, 100, 40, 40);`
+
+
+        starButton.frame = CGRectMake(margin, 100, 40, 40);`
+
 * 一些颜色的自定义设置 (具体属性可查看.h文件)
 
 
