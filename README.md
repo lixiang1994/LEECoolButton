@@ -22,7 +22,10 @@
 
 * 引入 `#import "LEECoolButton.h"`
 * 初始化按钮对象 添加图片对象 设置图片frame
+
+
   `LEECoolButton *starButton = [LEECoolButton coolButtonWithImage:[UIImage imageNamed:@"star"] ImageFrame:CGRectMake(10, 10, 20, 20)];`
+  
 * 设置按钮frame
   `starButton.frame = CGRectMake(margin, 100, 40, 40);`
 * 一些颜色的自定义设置 (具体属性可查看.h文件)
