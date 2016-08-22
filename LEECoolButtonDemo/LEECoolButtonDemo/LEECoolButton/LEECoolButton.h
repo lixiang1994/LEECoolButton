@@ -1,6 +1,6 @@
 
 /*!
- *  @header LEETheme.h
+ *  @header LEECoolButton.h
  *
  *  ┌─┐      ┌───────┐ ┌───────┐ 帅™
  *  │ │      │ ┌─────┘ │ ┌─────┘

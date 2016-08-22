@@ -1,6 +1,6 @@
 
 /*!
- *  @header LEETheme.m
+ *  @header LEECoolButton.m
  *
  *  @brief  LEE炫酷按钮
  *
@@ -369,8 +369,6 @@
                                @(0.967),  // 29/30
                                @(1.0)     // 30/30
                                ];
-
-    
     
 }
 
