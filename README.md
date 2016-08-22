@@ -2,7 +2,6 @@
 
 
 [![License GPL](https://img.shields.io/aur/license/yaourt.svg?maxAge=2592000)](https://github.com/lixiang1994/LEECoolButton/blob/master/LICENSE)&nbsp;
-[![CocoaPods](http://img.shields.io/cocoapods/v/LEETheme.svg?style=flat)](http://cocoapods.org/?q= LEECoolButton)&nbsp;
 [![CocoaPods](http://img.shields.io/cocoapods/p/LEETheme.svg?style=flat)](http://cocoapods.org/?q= LEECoolButton)&nbsp;
 [![Support](https://img.shields.io/badge/support-iOS7%2B-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;
 
@@ -56,3 +55,13 @@
 
 
 ###Swift原版 [点击跳转](https://github.com/okmr-d/DOFavoriteButton)
+
+
+系统要求
+==============
+该库最低支持 `iOS 7.0` 和 `Xcode 7.0`。
+
+
+许可证
+==============
+LEECoolButton 使用 GPL V3 许可证，详情见 LICENSE 文件。
