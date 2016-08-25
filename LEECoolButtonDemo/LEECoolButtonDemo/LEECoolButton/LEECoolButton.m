@@ -127,6 +127,12 @@
     
     _lineArray = [NSMutableArray array];
     
+    struct CGPath *path = CGPathCreateMutable();
+    
+    CGPathMoveToPoint(path, nil, lineFrame.origin.x + lineFrame.size.width / 2, lineFrame.origin.y + lineFrame.size.height / 2);
+    
+    CGPathAddLineToPoint(path, nil, lineFrame.origin.x + lineFrame.size.width / 2, lineFrame.origin.y);
+    
     for (NSInteger i = 0; i < 5; i++) {
         
         CAShapeLayer *line = [CAShapeLayer layer];
@@ -137,16 +143,7 @@
         line.strokeColor = self.lineColor.CGColor;
         line.lineWidth = 1.25f;
         line.miterLimit = 1.25f;
-        line.path = ({
-            
-            struct CGPath *path = CGPathCreateMutable();
-            
-            CGPathMoveToPoint(path, nil, lineFrame.origin.x + lineFrame.size.width / 2, lineFrame.origin.y + lineFrame.size.height / 2);
-            
-            CGPathAddLineToPoint(path, nil, lineFrame.origin.x + lineFrame.size.width / 2, lineFrame.origin.y);
-        
-            path;
-        });
+        line.path = path;
         line.lineCap = kCALineCapRound;
         line.lineJoin = kCALineJoinRound;
         line.strokeStart = 0.0f;
@@ -156,8 +153,9 @@
         [self.layer addSublayer:line];
         
         [self.lineArray addObject:line];
-    
     }
+    
+    CGPathRelease(path);
     
     //初始化 image layer
     
