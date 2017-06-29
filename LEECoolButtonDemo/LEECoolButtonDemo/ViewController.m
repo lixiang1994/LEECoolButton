@@ -62,7 +62,6 @@
     [likeButton addTarget:self action:@selector(likeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:likeButton];
-    
 }
 
 #pragma mark - 按钮点击事件
