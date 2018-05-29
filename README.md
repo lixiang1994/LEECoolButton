@@ -14,9 +14,9 @@
 使用
 ==============
 
-###OC重构版
+### OC重构版
 
-####使用方法
+#### 使用方法
 
 * 添加一个透明背景的平面图标 如下:
 
@@ -60,7 +60,7 @@
 
 
 
-###Swift原版 [点击跳转](https://github.com/okmr-d/DOFavoriteButton)
+### Swift原版 [点击跳转](https://github.com/okmr-d/DOFavoriteButton)
 
 
 系统要求
