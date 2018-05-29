@@ -60,7 +60,7 @@
 
 
 
-### Swift原版 [点击跳转](https://github.com/okmr-d/DOFavoriteButton)
+### Swift原版 (似乎没再更新了) [点击跳转](https://github.com/okmr-d/DOFavoriteButton)
 
 
 系统要求
