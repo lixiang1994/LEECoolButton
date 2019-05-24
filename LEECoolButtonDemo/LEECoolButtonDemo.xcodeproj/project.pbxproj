@@ -234,7 +234,7 @@
 			};
 			buildConfigurationList = 9B1D79FE1D697F6D008DB829 /* Build configuration list for PBXProject "LEECoolButtonDemo" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
